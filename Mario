@@ -1,0 +1,27 @@
+#include <cs50.h>
+#include <stdio.h>
+
+int main(void)
+{
+    int height;
+    do
+    {
+    height = get_int ("what is your height?\n");
+    if (height <= 8 & height > 0)
+    {
+        int line = 1;
+            while (line<=height)
+            {
+                printf ("%.*s", height-line, "          ");//first line
+                printf ("%.*s", line, "###################");//first line;
+                printf ("  ");//first line;
+                printf ("%.*s\n", line, "###################");//end of first line;
+                line=line+1;//make the program die if it exceeds
+            }
+    }
+    else
+    {
+    printf ("fuck off\n");
+    }
+}while (height <1 || height >8);
+}
