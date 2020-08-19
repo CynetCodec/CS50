@@ -1,0 +1,79 @@
+#include <cs50.h>
+#include <stdio.h>
+#include <math.h>
+
+int main (void)
+{
+long cardn = get_long ("what is your card number?\n");
+long ndigit = (long) log10 (cardn)+1;
+
+
+long sum = 0 ;//the initial sum of all even digits
+long sum2 = 0;//the initial sum of all odd digits
+
+if (ndigit>12 & ndigit<17)
+{
+    long DigitFL=1; //this is the number of digit from the last digit
+
+while (DigitFL<=ndigit)
+{
+    if (DigitFL%2==0) //makes sure we only cal the even digits
+    {
+        long evend = ((cardn/((long)pow(10,(DigitFL-1))))%10)*2;
+        if (evend >= 10)
+        {
+        long one = evend % 10;
+        long tenth = (evend/10)%10;
+        evend = one + tenth;
+        }
+        sum = sum+evend;
+ 
+    }
+    else
+    {
+        long oddd = (cardn/((long)pow(10,(DigitFL-1))))%10;
+        sum2 = sum2+oddd;
+    }
+    DigitFL=DigitFL+1;
+}
+}
+
+else
+{
+    printf ("INVALID\n");
+}
+
+long evensum=sum;
+long oddsum=sum2;
+long realsum=evensum+oddsum;
+
+
+long check = realsum % 10;
+
+if (check==0)
+{
+    long firstd = (cardn / ((long)(pow(10,(ndigit-1)))))%10;
+    long secondd = (cardn/ ((long)(pow(10,(ndigit-2)))))%10;
+
+    if (firstd==4)
+    {
+        printf("VISA\n");
+    }
+    else if ((firstd==5) & (secondd==1 || secondd==2 || secondd==3 || secondd==4 || secondd==5))
+    {
+        printf("MASTERCARD\n");
+    }
+    else if ((firstd==3) & (secondd==4 || secondd==7))
+    {
+        printf("AMEX\n");
+    }
+    else
+    {
+        printf("INVALID\n");
+    }
+}
+else
+{
+    printf("INVALID\n");
+}
+}
